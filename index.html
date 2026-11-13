@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flowchart Ganjil Genap - Estetik Sky Blue</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --sky-light: #e0f2fe;
+      --sky-medium: #bae6fd;
+      --sky-primary: #0284c7;
+      --sky-dark: #0369a1;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      color: var(--sky-dark);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(186, 230, 253, 0.9);
+      border-radius: 28px;
+      padding: 30px 16px;
+      box-shadow: 0 20px 40px -15px rgba(2, 132, 199, 0.15);
+      width: 100%;
+      max-width: 440px;
+      display: flex;
+      justify-content: center;
+      overflow-x: auto;
+    }
+
+    /* Kanvas Flowchart Presisi */
+    .canvas {
+      position: relative;
+      width: 360px;
+      height: 550px;
+      flex-shrink: 0;
+    }
+
+    /* Gaya Dasar Kotak */
+    .node {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.35;
+      border: 2px solid var(--sky-primary);
+      background-color: var(--white);
+      color: var(--sky-dark);
+      box-shadow: 0 6px 14px -4px rgba(2, 132, 199, 0.12);
+      z-index: 2;
+    }
+
+    /* 1. Mulai & Selesai */
+    .terminator {
+      left: 55px;
+      width: 140px;
+      height: 44px;
+      background: linear-gradient(135deg, #0ea5e9, #0284c7);
+      color: var(--white);
+      border: none;
+      border-radius: 50px;
+      font-weight: 700;
+    }
+
+    /* 2. Input / Output (Jajar Genjang) */
+    .parallelogram {
+      background-color: var(--sky-light);
+      transform: skewX(-16deg);
+      border-radius: 8px;
+    }
+    .parallelogram span {
+      transform: skewX(16deg);
+      display: block;
+    }
+
+    /* 3. Proses */
+    .process {
+      left: 30px;
+      top: 156px;
+      width: 190px;
+      height: 64px;
+      padding: 0 12px;
+      border-radius: 14px;
+    }
+
+    /* 4. Keputusan (Belah Ketupat) */
+    .decision {
+      left: 77px;
+      top: 262px;
+      width: 96px;
+      height: 96px;
+      background-color: var(--sky-medium);
+      border-radius: 14px;
+      transform: rotate(45deg);
+    }
+    .decision span {
+      transform: rotate(-45deg);
+      font-size: 12px;
+      font-weight: 700;
+      width: 100px;
+    }
+
+    /* Label Ya / Tidak */
+    .label {
+      position: absolute;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--sky-primary);
+      background: #f8fafc;
+      padding: 1px 6px;
+      border-radius: 6px;
+      z-index: 3;
+    }
+
+    /* Garis SVG */
+    svg.lines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="canvas">
+      <!-- Garis & Panah Penghubung Presisi -->
+      <svg class="lines" viewBox="0 0 360 550">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#0284c7" />
+          </marker>
+        </defs>
+
+        <!-- Mulai ke Input -->
+        <line x1="125" y1="54" x2="125" y2="80" stroke="#0284c7" stroke-width="2" marker-end="url(#arrow)" />
+        
+        <!-- Input ke Proses -->
+        <line x1="125" y1="128" x2="125" y2="152" stroke="#0284c7" stroke-width="2" marker-end="url(#arrow)" />
+        
+        <!-- Proses ke Keputusan -->
+        <line x1="125" y1="220" x2="125" y2="242" stroke="#0284c7" stroke-width="2" marker-end="url(#arrow)" />
+        
+        <!-- Keputusan ke Ganjil (Tidak) -->
+        <line x1="125" y1="376" x2="125" y2="412" stroke="#0284c7" stroke-width="2" marker-end="url(#arrow)" />
+        
+        <!-- Ganjil ke Selesai -->
+        <line x1="125" y1="458" x2="125" y2="500" stroke="#0284c7" stroke-width="2" marker-end="url(#arrow)" />
+
+        <!-- Keputusan ke Genap (Ya) -->
+        <line x1="192" y1="310" x2="246" y2="310" stroke="#0284c7" stroke-width="2" marker-end="url(#arrow)" />
+
+        <!-- Genap kembali ke jalur Selesai (Di bawah Ganjil) -->
+        <path d="M 300 332 L 300 480 L 131 480" fill="none" stroke="#0284c7" stroke-width="2" marker-end="url(#arrow)" />
+      </svg>
+
+      <!-- 1. Mulai -->
+      <div class="node terminator" style="top: 10px;">Mulai</div>
+
+      <!-- 2. Input -->
+      <div class="node parallelogram" style="left: 25px; top: 84px; width: 200px; height: 44px;">
+        <span>Masukan bilangan bulat</span>
+      </div>
+
+      <!-- 3. Proses -->
+      <div class="node process">
+        Bilangan dibagi 2 dengan operasi sisa bagi
+      </div>
+
+      <!-- 4. Keputusan -->
+      <div class="node decision">
+        <span>? sisa bagi = 0</span>
+      </div>
+
+      <!-- Label Ya & Tidak -->
+      <div class="label" style="left: 204px; top: 288px;">Ya</div>
+      <div class="label" style="left: 132px; top: 382px;">Tidak</div>
+
+      <!-- 5. Output Genap -->
+      <div class="node parallelogram" style="left: 250px; top: 288px; width: 96px; height: 44px;">
+        <span>Genap</span>
+      </div>
+
+      <!-- 6. Output Ganjil -->
+      <div class="node parallelogram" style="left: 72px; top: 416px; width: 106px; height: 42px;">
+        <span>Ganjil</span>
+      </div>
+
+      <!-- 7. Selesai -->
+      <div class="node terminator" style="top: 504px;">Selesai</div>
+    </div>
+  </div>
+
+</body>
+</html>
